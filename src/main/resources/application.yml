@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: uptimebot
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        order_inserts: true
+        order_updates: true
+        jdbc:
+          batch_size: 50
+          batch_versioned_data: true
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        hikari:
+          maximumPoolSize: ${HIKARI_MAXIMUM_POOL_SIZE:5}
+          minimumIdle: ${HIKARI_MINIMUM_IDLE:2}
+  liquibase:
+    change-log: 'classpath:db/changelog/db.changelog-main.xml'
+    default-schema: ${application.multitenant.default-tenant}
+
+  datasource:
+    url: ${JDBC_URL:jdbc:postgresql://localhost:5434/core}
+    username: ${DB_USERNAME:dashboard_user}
+    password: ${DB_PASSWORD:password}

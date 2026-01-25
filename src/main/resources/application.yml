@@ -1,6 +1,8 @@
 spring:
   application:
     name: uptimebot
+  main:
+    web-application-type: servlet
 
   jpa:
     hibernate:

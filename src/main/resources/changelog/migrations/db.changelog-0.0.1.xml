@@ -14,4 +14,8 @@
       <column name="schedule" type="interval"/>
     </createTable>
   </changeSet>
+
+  <changeSet id="0.0.1 26-Jan-2026 17:45" author="Viacheslav Bychkovskyi">
+    <createSequence sequenceName="monitor_id_sequence"/>
+  </changeSet>
 </databaseChangeLog>

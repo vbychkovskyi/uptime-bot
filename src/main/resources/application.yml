@@ -19,8 +19,7 @@ spring:
           maximumPoolSize: ${HIKARI_MAXIMUM_POOL_SIZE:5}
           minimumIdle: ${HIKARI_MINIMUM_IDLE:2}
   liquibase:
-    change-log: 'classpath:db/changelog/db.changelog-main.xml'
-    default-schema: ${application.multitenant.default-tenant}
+    change-log: 'classpath:changelog/db.changelog-main.xml'
 
   datasource:
     url: ${JDBC_URL:jdbc:postgresql://localhost:5432/uptime_bot}

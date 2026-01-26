@@ -23,6 +23,8 @@ dependencies {
 	annotationProcessor ("org.projectlombok:lombok:1.18.42")
 
 	implementation("org.springframework.boot:spring-boot-starter")
+	implementation("org.springframework.boot:spring-boot-starter-liquibase")
+	implementation("io.hypersistence:hypersistence-utils-hibernate-71:3.14.1")
 	implementation("org.springframework.boot:spring-boot-starter-web") {
 		exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
 	}
@@ -30,7 +32,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-quartz")
 
-	implementation("org.liquibase:liquibase-core:4.32.0")
+//	implementation("org.liquibase:liquibase-core")
 	runtimeOnly ("org.postgresql:postgresql")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")

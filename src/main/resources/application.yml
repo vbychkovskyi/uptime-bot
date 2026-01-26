@@ -26,3 +26,17 @@ spring:
     url: ${JDBC_URL:jdbc:postgresql://localhost:5432/uptime_bot}
     username: ${DB_USERNAME:uptime_bot}
     password: ${DB_PASSWORD:uptime_bot}
+
+  quartz:
+    properties:
+      org.quartz.jobStore.driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+      org.quartz.scheduler.instanceName: QuartzScheduler
+      org.quartz.scheduler.instanceId: AUTO
+      org.quartz.scheduler.batchTriggerAcquisitionMaxCount: ${QUARTZ_THREAD_COUNT:25}
+      org.quartz.scheduler.batchTriggerAcquisitionFireAheadTimeWindow: 7000
+      org.quartz.threadPool.threadCount: ${QUARTZ_THREAD_COUNT:25}
+      org.quartz.jobStore.isClustered: true
+
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: ALWAYS

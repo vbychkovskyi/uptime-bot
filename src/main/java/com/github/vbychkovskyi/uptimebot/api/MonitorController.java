@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.vbychkovskyi.uptimebot.api.model.InputMonitor;
 import com.github.vbychkovskyi.uptimebot.api.model.Monitor;
+import com.github.vbychkovskyi.uptimebot.service.MonitorScheduler;
 import com.github.vbychkovskyi.uptimebot.service.MonitorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,16 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class MonitorController {
 
   private final MonitorService monitorService;
+  private final MonitorScheduler monitorScheduler;
 
-  @PostMapping("/monitor")
+  @PostMapping("/monitors")
   public Monitor createMonitor(@RequestBody InputMonitor monitor) {
-    log.info("Received monitor: {}", monitor);
+    log.info("Create monitor: {}", monitor);
 
     return monitorService.createMonitor(monitor);
   }
 
   @Nullable
-  @GetMapping("/monitor/{id}")
+  @GetMapping("/monitors/{id}")
   public Monitor getMonitor(@PathVariable Long id) {
 
     return monitorService.getMonitor(id);
@@ -43,10 +45,20 @@ public class MonitorController {
     return monitorService.getMonitors();
   }
 
-  @DeleteMapping("/monitor/{id}")
+  @DeleteMapping("/monitors/{id}")
   public void deleteMonitor(@PathVariable Long id) {
     log.info("Delete monitor: {}", id);
 
     monitorService.deleteMonitor(id);
+  }
+
+  @PostMapping("/monitors/{id}/start")
+  public void startMonitor(@PathVariable Long id) {
+    monitorScheduler.startMonitor(id);
+  }
+
+  @PostMapping("/monitors/{id}/stop")
+  public void stopMonitor(@PathVariable Long id) {
+    monitorScheduler.stopMonitor(id);
   }
 }

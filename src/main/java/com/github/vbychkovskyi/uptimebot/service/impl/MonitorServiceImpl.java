@@ -33,9 +33,8 @@ public class MonitorServiceImpl implements MonitorService {
   @Nullable
   public Monitor getMonitor(final Long id) {
     return monitorRepository.findById(id)
-      .map(v -> {
-        return new Monitor(v.getId(), v.getName(), v.getUrl(), v.getSchedule());
-      }).orElse(null);
+      .map(v -> new Monitor(v.getId(), v.getName(), v.getUrl(), v.getSchedule()))
+      .orElseThrow();
   }
 
   @Override

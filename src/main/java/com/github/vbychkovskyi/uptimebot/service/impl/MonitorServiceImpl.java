@@ -25,6 +25,8 @@ public class MonitorServiceImpl implements MonitorService {
     monitorEntity.setName(monitor.name());
     monitorEntity.setSchedule(monitor.schedule());
     monitorEntity.setUrl(monitor.url());
+    monitorEntity.setUpChannel(monitor.upChannel());
+    monitorEntity.setDownChannel(monitor.downChannel());
     final var save = monitorRepository.save(monitorEntity);
     return mapMonitor(save);
   }

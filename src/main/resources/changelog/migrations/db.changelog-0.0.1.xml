@@ -18,4 +18,29 @@
   <changeSet id="0.0.1 26-Jan-2026 17:45" author="Viacheslav Bychkovskyi">
     <createSequence sequenceName="monitor_id_sequence"/>
   </changeSet>
+
+  <changeSet id="0.0.1 27-Jan-2026 10:11" author="Viacheslav Bychkovskyi">
+    <addColumn tableName="monitor">
+      <column name="up_channel" type="jsonb"/>
+      <column name="down_channel" type="jsonb"/>
+    </addColumn>
+  </changeSet>
+
+  <changeSet id="0.0.1 27-Jan-2026 10:12" author="Viacheslav Bychkovskyi">
+    <createTable tableName="monitor_status">
+      <column name="id" type="bigint">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="monitor_id" type="bigint">
+        <constraints foreignKeyName="monitor_status_monitor_id_fk"
+          referencedTableName="monitor"
+          referencedColumnNames="id"
+        />
+      </column>
+      <column name="status" type="varchar"/>
+      <column name="last_check_at" type="timestamp"/>
+      <column name="last_status_changed_at" type="timestamp"/>
+    </createTable>
+  </changeSet>
+
 </databaseChangeLog>

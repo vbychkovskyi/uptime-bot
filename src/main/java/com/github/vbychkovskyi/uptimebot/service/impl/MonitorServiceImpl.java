@@ -26,24 +26,34 @@ public class MonitorServiceImpl implements MonitorService {
     monitorEntity.setSchedule(monitor.schedule());
     monitorEntity.setUrl(monitor.url());
     final var save = monitorRepository.save(monitorEntity);
-    return new Monitor(save.getId(), monitor.name(), monitor.url(), monitor.schedule());
+    return mapMonitor(save);
   }
 
   @Override
   @Nullable
   public Monitor getMonitor(final Long id) {
     return monitorRepository.findById(id)
-      .map(v -> new Monitor(v.getId(), v.getName(), v.getUrl(), v.getSchedule()))
+      .map(this::mapMonitor)
       .orElseThrow();
+  }
+
+  private Monitor mapMonitor(final MonitorEntity v) {
+    return new Monitor(
+      v.getId(),
+      v.getName(),
+      v.getUrl(),
+      v.getSchedule(),
+      v.getUpChannel(),
+      v.getDownChannel()
+    );
   }
 
   @Override
   public List<Monitor> getMonitors() {
     return monitorRepository.findAll()
       .stream()
-      .map(entity ->
-        new Monitor(entity.getId(), entity.getName(), entity.getUrl(), entity.getSchedule())
-      ).toList();
+      .map(this::mapMonitor)
+      .toList();
   }
 
   @Override

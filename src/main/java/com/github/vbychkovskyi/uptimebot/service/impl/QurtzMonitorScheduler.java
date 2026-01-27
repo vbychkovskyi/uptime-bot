@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.time.Instant;
 
 import com.github.vbychkovskyi.uptimebot.api.model.Monitor;
+import com.github.vbychkovskyi.uptimebot.quartz.MonitorJob;
 import com.github.vbychkovskyi.uptimebot.service.MonitorScheduler;
 import com.github.vbychkovskyi.uptimebot.service.MonitorService;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class QurtzMonitorScheduler implements MonitorScheduler {
 
-  private static final String MONITOR_ID = "monitorId";
-
   private final Scheduler scheduler;
   private final MonitorService monitorService;
 
@@ -34,7 +33,7 @@ public class QurtzMonitorScheduler implements MonitorScheduler {
     final var trigger = newTrigger()
       .forJob(new JobKey("MONITOR_ID"))
       .withIdentity(TriggerKey.triggerKey("Monitor: " + id))
-      .usingJobData(MONITOR_ID, id)
+      .usingJobData(MonitorJob.MONITOR_ID, id)
       .startAt(Instant.now())
       .withSchedule(simpleSchedule()
         .withIntervalInSeconds((int) monitor.schedule().getSeconds())

@@ -2,7 +2,9 @@ package com.github.vbychkovskyi.uptimebot.orm.entity;
 
 import java.time.Duration;
 
+import com.github.vbychkovskyi.uptimebot.api.model.WebhookChannel;
 import io.hypersistence.utils.hibernate.type.interval.PostgreSQLIntervalType;
+import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,4 +41,18 @@ public class MonitorEntity {
     columnDefinition = "interval"
   )
   private Duration schedule;
+
+  @Type(JsonBinaryType.class)
+  @Column(
+    name = "up_channel",
+    columnDefinition = "jsonb"
+  )
+  private WebhookChannel upChannel;
+
+  @Type(JsonBinaryType.class)
+  @Column(
+    name = "down_channel",
+    columnDefinition = "jsonb"
+  )
+  private WebhookChannel downChannel;
 }

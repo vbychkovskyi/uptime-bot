@@ -4,6 +4,8 @@ services:
   uptimebot:
     image: ghcr.io/vbychkovskyi/uptimebot:latest
     restart: unless-stopped
+    depends_on:
+      - postgres
     environment:
       JDBC_URL: jdbc:postgresql://postgres:5432/uptime_bot
       QUARTZ_INITIALIZE_SCHEMA: NEVER

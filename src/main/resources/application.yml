@@ -38,4 +38,4 @@ spring:
 
     job-store-type: jdbc
     jdbc:
-      initialize-schema: NEVER
+      initialize-schema: ${QUARTZ_INITIALIZE_SCHEMA:NEVER}

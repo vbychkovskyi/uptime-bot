@@ -22,7 +22,7 @@ public class MonitorJob extends QuartzJobBean {
 
   @Override
   protected void executeInternal(final JobExecutionContext context) {
-    log.info("Monitor job is executed");
+    log.debug("Monitor job is executed");
 
     final var monitor = monitorService.getMonitor(context.getMergedJobDataMap().getLong(MONITOR_ID));
 

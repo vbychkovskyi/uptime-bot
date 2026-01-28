@@ -26,7 +26,7 @@ public class NotificationServiceFacade implements NotificationService {
 
       notificationService.notify(monitor, status);
     } else {
-      log.info("Monitor status not changed: {} status: {}", monitor.name(), status);
+      log.debug("Monitor status not changed: {} status: {}", monitor.name(), status);
     }
   }
 }

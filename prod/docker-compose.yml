@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     environment:
       JDBC_URL: jdbc:postgresql://postgres:5432/uptime_bot
-      QUARTZ_INITIALIZE_SCHEMA: ALWAYS
+      QUARTZ_INITIALIZE_SCHEMA: NEVER
   postgres:
     image: postgres:16-alpine
     restart: unless-stopped

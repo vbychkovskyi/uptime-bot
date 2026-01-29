@@ -11,10 +11,6 @@ services:
       - monitor
 
   uptimebot:
-    deploy:
-      resources:
-        limits:
-          memory: 128m
     image: ghcr.io/vbychkovskyi/uptimebot:latest
     restart: unless-stopped
     networks:
